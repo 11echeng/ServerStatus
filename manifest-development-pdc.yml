@@ -1,0 +1,14 @@
+applications:
+- name: myconnections-development
+  routes:
+    - route: myconnections-development.pdc.np.paas.lmig.com
+  buildpack: nodejs_current
+  instances: 1
+  memory: 512M
+  timeout: 180
+  env:
+    NODE_ENV: production
+    NEW_RELIC_APP_NAME: myconnections-development
+  services:
+    - myconnections-development-keys
+    - newrelic
