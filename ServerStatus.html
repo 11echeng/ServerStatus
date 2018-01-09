@@ -1,0 +1,120 @@
+<script>
+  /*
+What:
+The ping.js creates real time pings instances 
+to 3 TM1 servers: Dev[VMKID-ETMONE01] Test[VMKIT-ETMONE01] Prod[VMPIP-ETMONE01]
+
+How:
+We use the two objects favicon and timeout to measure the the status
+the server(s). 
+
+1. favicon - Every online domain has a favicon.ico object - This is used 
+as a parameter that overrides the default favicon.ico
+2. timeout -  This is the parameter that sets the timeout.
+
+The ping.js is triggerd by the p.ping(domain) & function(err, data)
+1. p.ping(domain) - gets the URL of the source
+2. function(err, data) - returns the status & response time in ms
+
+Variables: a , b, c, d
+
+a= hostname
+b= err type
+c= function (d-e) -> changed to return "Online" 
+d= time (ms)
+e= time (ms)
+img= favicon
+
+ping.js is uploading a favicon.ico image from the domain and the response
+time. If the favicon image does not load, an error of "offline" will return.*/
+
+/*This function is called initally at p.ping("hostname",) function (err, data) {} 
+    function (a, b) -> a = URL | b = f(err, data)
+        function c(a) { -> c = f c(a) -> c = NaN
+            d && clearTimeout(d); -> d = undefined -> d = undefined
+            var c = new Date - e; -> c = ƒ c(a), e = undefined -> e = undefined -> e = initial time
+    
+*/
+
+/*This function is called initally at "var p = new ping();"*/
+var Ping = function(a) {
+    this.opt = a || {}, this.favicon = this.opt.favicon || "/favicon.ico", this.timeout = this.opt.timeout || 0
+};
+
+
+Ping.prototype.ping = function(a, b) {
+    function c(a) {
+        d && clearTimeout(d);
+        var c = "online"
+        return "function" == typeof b ? "error" === a.type  ?  (b("offline", c)) : b(null, c) : void 0
+};
+    
+    /*start here*/
+    this.img = new Image; //Creates new image
+    var d, e = new Date; //grabs the present time
+    this.img.onload = c, this.img.onerror = c, this.timeout && (d = setTimeout(c, this.timeout)), this.img.src = a + this.favicon + "?" + +new Date /*updated variables*/
+};
+</script>
+
+<html>
+	<head>
+    <title>Ping TM1 Servers</title>
+    <style> 
+      nl span {
+        color: green;
+        font-weight: bold;
+        font-size: 14px;
+
+      }
+    </style>
+  </head>
+  
+  <body>
+      <p><strong>TM1 Server Status:</strong></p>
+  
+      <form action="/action_page.php">
+  
+          <p><img alt="" class="image-11 jive-image" src="server1.png" style="height: auto;" __jive_id="489742" /><input name="gender" type="radio" value="VMKID-ETMONE01" /></p>
+          <p style="padding-left: 30px;"><span style="font-size: 8pt; font-family: helvetica;"><strong>TM1 Dev:</strong> &nbsp <nl><span id="TM1-DEV"></span></nl></span></p>
+  
+          <p><img alt="" class="image-12 jive-image" src="server3_1.png" style="height: auto;" __jive_id="489745" /><input name="gender" type="radio" value="VMKIT-ETMONE01" /></p>
+          <p style="padding-left: 30px;"><span style="font-size: 8pt; font-family: helvetica;"><strong>TM1 Test:</strong> &nbsp<nl><span id="TM1-TEST"></span></nl></span></p>
+  
+          <p><img alt="" class="image-13 jive-image" src="server2_1.png" style="height: auto;" __jive_id="489746" /><input name="gender" type="radio" value="VMPIP-ETMONE01" /></p>
+          <p style="padding-left: 30px;"><span style="font-size: 8pt; font-family: helvetica;"><strong>TM1 Prod:</strong> &nbsp<nl><span id="TM1-PROD"></span></nl></span></p>
+  
+          <p><input type="submit" value="Submit" /></p>
+  
+      </form> 
+    
+    <script>
+      //Creates a new object 
+      var p = new Ping();
+      //every hostname gets called to function(a) {} and grabs favicon. 
+      p.ping("http://vmkit-etmone01:9510/pmpsvc", function(err, data) { /* this function is called to get the status of ping function*/
+        // If statement: If an error: change status to offline; if not: online
+        if (err) {
+          console.log("error loading resource")
+          data = err;
+        }
+        //responsible for adding the data value into the class of "TM1-DEV"
+        document.getElementById("TM1-DEV").innerHTML = data;
+      });
+
+      p.ping("http://vmkit-etmone01:9510/pmpsvc", function(err, data) {
+         if (err) {
+          console.log("error loading resource")
+          data = err;
+        }
+        document.getElementById("TM1-TEST").innerHTML = data;
+      });
+      p.ping("http://vmpip-etmone01:9510/pmpsvc", function(err, data) {
+        if (err) {
+          data = err;
+        }
+        document.getElementById("TM1-PROD").innerHTML = data;
+      });
+
+    </script>
+	</body>
+</html>
