@@ -1,3 +1,6 @@
+<head>
+    <script src="form_reference.js"></script>
+</head>
 <script>
   /*
 What:
@@ -64,6 +67,7 @@ Ping.prototype.ping = function(a, b) {
         color: green;
         font-weight: bold;
         font-size: 14px;
+        
 
       }
     </style>
@@ -72,15 +76,21 @@ Ping.prototype.ping = function(a, b) {
   <body>
       <p><strong>TM1 Server Status:</strong></p>
   
-      <form action="/action_page.php">
+      <form action="#" method="post" onsubmit="return ValidationEvent()">
   
-          <p><img alt="" class="image-11 jive-image" src="server1.png" style="height: auto;" __jive_id="489742" /><input name="gender" type="radio" value="VMKID-ETMONE01" /></p>
+          <p>
+            <img alt="" class="image-11 jive-image" src="server1.png" style="height: auto;" __jive_id="489742" />
+            <input id="DEV" name="server" type="radio" value="VMKID-ETMONE01">
+          </p>
           <p style="padding-left: 30px;"><span style="font-size: 8pt; font-family: helvetica;"><strong>TM1 Dev:</strong> &nbsp <nl><span id="TM1-DEV"></span></nl></span></p>
   
-          <p><img alt="" class="image-12 jive-image" src="server3_1.png" style="height: auto;" __jive_id="489745" /><input name="gender" type="radio" value="VMKIT-ETMONE01" /></p>
+          <p>
+            <img alt="" class="image-12 jive-image" src="server3_1.png" style="height: auto;" __jive_id="489745" />
+            <input id="TEST" name="server" type="radio" value="VMKIT-ETMONE01">
+          </p>
           <p style="padding-left: 30px;"><span style="font-size: 8pt; font-family: helvetica;"><strong>TM1 Test:</strong> &nbsp<nl><span id="TM1-TEST"></span></nl></span></p>
   
-          <p><img alt="" class="image-13 jive-image" src="server2_1.png" style="height: auto;" __jive_id="489746" /><input name="gender" type="radio" value="VMPIP-ETMONE01" /></p>
+          <p><img alt="" class="image-13 jive-image" src="server2_1.png" style="height: auto;" __jive_id="489746" /><input id= "PROD" name="server" type="radio" value="VMPIP-ETMONE01" /></p>
           <p style="padding-left: 30px;"><span style="font-size: 8pt; font-family: helvetica;"><strong>TM1 Prod:</strong> &nbsp<nl><span id="TM1-PROD"></span></nl></span></p>
   
           <p><input type="submit" value="Submit" /></p>
@@ -91,7 +101,7 @@ Ping.prototype.ping = function(a, b) {
       //Creates a new object 
       var p = new Ping();
       //every hostname gets called to function(a) {} and grabs favicon. 
-      p.ping("http://vmkit-etmone01:9510/pmpsvc", function(err, data) { /* this function is called to get the status of ping function*/
+      p.ping("http://espn.com", function(err, data) { /* this function is called to get the status of ping function*/
         // If statement: If an error: change status to offline; if not: online
         if (err) {
           console.log("error loading resource")
