@@ -10,6 +10,12 @@ function ValidationEvent() {
             var Dvalue = confirm("Do you want to report an issue in TM1 DEV?");
                 if (Dvalue == true) {
                     alert("User wants to report an issue in TM1 DEV!");
+                    //var email = 
+                    //var subject= 
+                    //document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody;
+                    //window.open = "mailto:ase_support_team@libertymutual.com";
+                    //document.location = "mailto:ase_support_team@libertymutual.com";
+                    //document.location.href= "mailto:ase_support_team@libertymutual.com";
                 } else {
                     alert("User does not want to report an issue in TM1 DEV!");
                 }
@@ -40,4 +46,3 @@ function ValidationEvent() {
         return false;
     } 
 }
-    

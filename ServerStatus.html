@@ -59,6 +59,17 @@ Ping.prototype.ping = function(a, b) {
 };
 </script>
 
+<script>
+function ChangeColor(){
+	if (document.getElementById('TM1-DEV').value = 'online') {
+		document.getElementById('TM1-DEV').style.color = 'green';
+	} else {
+		document.getElementById('TM1-DEV').style.color = 'red'
+	}
+}
+document.getElementById('TM1-DEV').onchange= ChangeColor;
+</script>
+
 <html>
 	<head>
     <title>Ping TM1 Servers</title>
@@ -70,6 +81,8 @@ Ping.prototype.ping = function(a, b) {
         
 
       }
+
+
     </style>
   </head>
   
@@ -80,7 +93,7 @@ Ping.prototype.ping = function(a, b) {
   
           <p>
             <img alt="" class="image-11 jive-image" src="server1.png" style="height: auto;" __jive_id="489742" />
-            <input id="DEV" name="server" type="radio" value="VMKID-ETMONE01">
+            <input id="DEV" name="server" type="radio" value="VMKID-ETMONE01" onclick="">
           </p>
           <p style="padding-left: 30px;"><span style="font-size: 8pt; font-family: helvetica;"><strong>TM1 Dev:</strong> &nbsp <nl><span id="TM1-DEV"></span></nl></span></p>
   
@@ -101,13 +114,14 @@ Ping.prototype.ping = function(a, b) {
       //Creates a new object 
       var p = new Ping();
       //every hostname gets called to function(a) {} and grabs favicon. 
-      p.ping("http://espn.com", function(err, data) { /* this function is called to get the status of ping function*/
+      p.ping("http://vmkid-etmone01:9510/peempsvc", function(err, data) { /* this function is called to get the status of ping function*/
         // If statement: If an error: change status to offline; if not: online
         if (err) {
           console.log("error loading resource")
           data = err;
         }
         //responsible for adding the data value into the class of "TM1-DEV"
+        document.getElementById('TM1-DEV').onchange= ChangeColor;
         document.getElementById("TM1-DEV").innerHTML = data;
       });
 
